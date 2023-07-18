@@ -1,0 +1,30 @@
+@import '../../scss/colors';
+
+.card-user {
+  background-color: $purpleLight;
+  padding: 1rem;
+
+  &__container {
+    display: flex;
+    gap: 1rem;
+
+    &-image, &-description {
+      background-color: $purple;
+      padding: 1rem;
+    }
+  
+    &-image {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      text-transform: capitalize;
+
+      img {
+        width: 200px;
+      }
+    }
+    &-description {
+      
+    }
+  }
+}

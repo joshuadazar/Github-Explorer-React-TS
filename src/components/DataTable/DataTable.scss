@@ -1,0 +1,120 @@
+@import '../../scss/breakpoints.scss';
+@import '../../scss/colors.scss';
+
+.github__table {
+  border-collapse: collapse;
+  width: 100%;
+
+  @include from(mobile) {
+    margin: 0 auto;
+    display: none;
+  }
+
+  .description {
+    white-space: wrap;
+  }
+
+  thead tr {
+    background-color: $purpleLight;
+    color: $grey;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    a {
+      color: $white;
+    }
+  }
+
+  th {
+    text-align: left;
+  }
+
+  .pagination {
+    order: 1;
+    display: flex;
+    justify-content: space-around;
+    gap: $base;
+
+    @include mobile {
+      flex-direction: column;
+    }
+
+    &__current-page,
+    &__total-pages {
+      position: absolute;
+      text-align: center;
+
+      @include mobile {
+        position: relative;
+      }
+    }
+
+    &__total-pages {
+      right: $baseXL;
+      padding-right: 1rem;
+
+      @include mobile {
+        padding-right: 0;
+        right: 0;
+      }
+    }
+
+    &__current-page {
+      left: $baseXL;
+      padding-left: 1rem;
+
+      @include mobile {
+        left: 0;
+        padding-left: 0;
+      }
+    }
+
+    &__list {
+      align-items: center;
+      display: flex;
+      justify-content: space-around;
+      list-style: none;
+      padding: 0;
+
+      @include mobile {
+        order: 3;
+      }
+
+      &-btn-prev,
+      &-btn-next {
+        cursor: pointer;
+        padding: 0 1rem;
+        position: relative;
+        user-select: none;
+
+        &:hover {
+          text-shadow: 0 0 1px $white;
+        }
+      }
+
+      &-btn-prev {
+        &::before {
+          content: '❮';
+          margin-right: 10px;
+          transition: color 0.3s ease-in-out;
+        }
+        &:hover::before {
+          color: $green;
+        }
+      }
+
+      &-btn-next {
+        &::after {
+          content: '❯';
+          margin-left: 10px;
+          transition: color 0.3s ease-in-out;
+        }
+        &:hover::after {
+          color: $green;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+@import '../../scss/colors.scss';
+
+.header {
+  background-color: $purple;
+  padding: 1rem;
+  text-align: center;
+
+  &__title {
+    color: $white;
+    span {
+      color: $green;
+    }
+  }
+  &__search-container {
+    display: flex;
+    justify-content: center;
+
+    &-input-search {
+      padding: 0.5rem;
+    }
+  }
+}

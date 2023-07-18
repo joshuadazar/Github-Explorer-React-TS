@@ -1,0 +1,60 @@
+$base: 16px;
+$baseL: $base * 3;
+$baseXL: $base * 6;
+// Standard breakpoints.
+$mobile: 320px;
+$mobile-m: 360px;
+$mobile-l: 415px;
+$tablet: 600px;
+$desktop: 1024px;
+$desktop-m: 1280px;
+$desktop-l: 1440px;
+$desktop-xl: 1600px;
+$desktop-xxl: 1920px;
+$desktop-xxxl: 2560px;
+$landscape: 930px;
+$desktop-landscape: 913px;
+$desktop-portrait: 914px;
+$mobile-landscape-zoom: 250px;
+
+$bps: (
+  'mobile': $mobile,
+  'mobile-m': $mobile-m,
+  'mobile-l': $mobile-l,
+  'tablet': $tablet,
+  'desktop': $desktop,
+  'desktop-m': $desktop-m,
+  'desktop-l': $desktop-l,
+  'desktop-xl': $desktop-xl,
+  'desktop-xxl': $desktop-xxl,
+  'desktop-xxxl': $desktop-xxxl,
+);
+
+// Mixin to override styles depending on the viewport.
+// Use it as @include from(desktop) { ...your styles }.
+@mixin from($media) {
+  $min-width-bp: (map-get($bps, $media) or $media);
+
+  @media only screen and (min-width: $min-width-bp) {
+    @content;
+  }
+}
+
+//breakpoints
+@mixin mobile {
+  @media screen and (min-width: 320px) and (max-width: $tablet - 1px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: $tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $desktop) {
+    @content;
+  }
+}
