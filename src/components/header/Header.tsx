@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useMemo } from 'react';
 import './header.scss';
 import { getUserData, UserService } from '../../services/GithubService';
-import Igithub from '../../models/Igithub';
+import { Github } from '../../models/Igithub';
 
 export default function Header() {
   const [searchInput, setSearchInput] = useState(undefined);
@@ -17,7 +17,7 @@ export default function Header() {
     ) {
       getUserData(text.trim().toLowerCase()).subscribe((res) => {
         if (res !== undefined) {
-          const result: Igithub = res.response;
+          const result: Github = res.response;
           console.log(result);
           setSearchInput(result);
           UserService().setUserState(result);

@@ -17,18 +17,18 @@ export function UserService() {
   };
 }
 
-// Users Array Datatale
+// Users Repositories Array Datatable
 
-const usersArray = new BehaviorSubject([]);
+const usersRepoArray = new BehaviorSubject([]);
 
-const getUsersState = () => usersArray.asObservable();
+const getUsersRepoState = () => usersRepoArray.asObservable();
 
-const setUsersState = (value: any[]) => usersArray.next(value);
+const setUsersRepoState = (value: any[]) => usersRepoArray.next(value);
 
-export function UsersService() {
+export function UserReposService() {
   return {
-    getUsersState,
-    setUsersState,
+    getUsersRepoState,
+    setUsersRepoState,
   };
 }
 
@@ -36,6 +36,15 @@ export function UsersService() {
 
 export const getUserData = (username) => {
   const url = `https://api.github.com/users/${username}`;
+
+  return ajax({
+    url,
+    method: 'GET',
+  });
+};
+
+export const getUserRepo = (repo) => {
+  const url = `https://api.github.com/users/${repo}/repos`;
 
   return ajax({
     url,

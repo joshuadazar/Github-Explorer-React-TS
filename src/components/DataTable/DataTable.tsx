@@ -1,57 +1,54 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import './DataTable.scss';
-import { getUserData } from '../../services/GithubService';
-import Igithub from '../../models/Igithub';
+import { UserReposService } from '../../services/GithubService';
+import { GithubRepos } from '../../models/Igithub';
 
 export default function DataTable() {
-  const [dataTable, setDataTable] = useState(undefined);
+  const [dataTable, setDataTable] = useState<GithubRepos[]>(undefined);
 
   useEffect(() => {
-    /*
-    const subscription = getUserData('joshuadazar').subscribe((res) => {
-      if (res !== undefined) {
-        const result: Igithub = res.response;
-        console.log(result);
-        dataTable !== undefined && setDataTable(result);
-      }
-    });
+    const subscription = UserReposService()
+      .getUsersRepoState()
+      .subscribe((res) => {
+        if (res !== undefined) {
+          const result: GithubRepos[] = res;
+          console.log(result, 'from tabla');
+          dataTable !== undefined && setDataTable(result);
+        }
+      });
     return () => {
       subscription.unsubscribe();
     };
-    */
   }, []);
+
+  const getReposData = () => {
+    dataTable.map((repo) => (
+      <tr key={repo?.id}>
+        <td>{repo.name}</td>
+        <td>{repo.watchers_count}</td>
+        <td>{repo.description}</td>
+        <td>{repo.visibility}</td>
+        <td>{repo.size}</td>
+        <td>
+          <a href={repo.html_url} rel="noopener"></a>Link
+        </td>
+      </tr>
+    ));
+  };
   return (
     <table className="github__table">
       <thead>
         <tr>
           <th>Repository Name</th>
-          <th>Owner</th>
+          <th>Watchers count</th>
           <th>Description</th>
-          <th>Forks</th>
-          <th>🌟</th>
+          <th>Visibility</th>
+          <th>Size</th>
           <th>Git URL</th>
         </tr>
       </thead>
-      <tbody>
-        <div></div>
-        <tr>
-          <td>Repository</td>
-          <td>Owner</td>
-          <td className="description">Description repo</td>
-          <td>Forks</td>
-          <td>Stars</td>
-          <td>
-            <a
-              target="_blank"
-              href="{{repo.html_url}}"
-              rel="noreferrer noopener"
-            >
-              Link
-            </a>
-          </td>
-        </tr>
-      </tbody>
+      <tbody>{dataTable!== undefined && getReposData()}</tbody>
     </table>
   );
 }
