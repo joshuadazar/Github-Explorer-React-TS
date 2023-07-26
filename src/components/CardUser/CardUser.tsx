@@ -24,17 +24,18 @@ export default function CardUSer() {
 
   const findUserRepo = () => {
     console.log('click');
-    const suscription = getUserRepo(userData.login).subscribe((request) => {
-      if (request.status === 200) {
-        const repos: GithubRepos[] = request.response;
-        console.log(repos,'from card');
-        UserReposService().setUsersRepoState(repos);
-      }
-    });
-
-    return () => {
-      suscription.unsubscribe();
-    };
+    if (userData !== undefined) {
+      const suscription = getUserRepo(userData.login).subscribe((request) => {
+        if (request.status === 200) {
+          const repos: GithubRepos[] = request.response;
+          console.log(repos, 'from card');
+          UserReposService().setUsersRepoState(repos);
+        }
+      });
+      return () => {
+        suscription.unsubscribe();
+      };
+    }
   };
   return (
     <>

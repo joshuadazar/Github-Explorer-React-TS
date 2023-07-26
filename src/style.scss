@@ -1,4 +1,5 @@
 @import './scss/colors.scss';
+@import './scss/breakpoints.scss';
 @import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
 
 body {
@@ -9,7 +10,14 @@ body {
 
   .btn {
     background-color: $green;
+    font-size: 1rem;
     outline-style: none;
-    padding: 0.5rem;
+    padding: 1rem;
+    width: 100%;
+
+    @include from(tablet) {
+      padding: 0.5rem;
+      width: auto;
+    }
   }
 }

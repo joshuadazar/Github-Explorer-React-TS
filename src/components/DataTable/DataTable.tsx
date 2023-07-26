@@ -13,8 +13,7 @@ export default function DataTable() {
       .subscribe((res) => {
         if (res !== undefined) {
           const result: GithubRepos[] = res;
-          console.log(result, 'from tabla');
-          dataTable !== undefined && setDataTable(result);
+          setDataTable(result);
         }
       });
     return () => {
@@ -22,8 +21,8 @@ export default function DataTable() {
     };
   }, []);
 
-  const getReposData = () => {
-    dataTable.map((repo) => (
+  const rows = dataTable?.map((repo) => {
+    return (
       <tr key={repo?.id}>
         <td>{repo.name}</td>
         <td>{repo.watchers_count}</td>
@@ -31,11 +30,12 @@ export default function DataTable() {
         <td>{repo.visibility}</td>
         <td>{repo.size}</td>
         <td>
-          <a href={repo.html_url} rel="noopener"></a>Link
+          <a href={repo.html_url} rel="noopener">Link</a>
         </td>
       </tr>
-    ));
-  };
+    );
+  });
+
   return (
     <table className="github__table">
       <thead>
@@ -48,7 +48,7 @@ export default function DataTable() {
           <th>Git URL</th>
         </tr>
       </thead>
-      <tbody>{dataTable!== undefined && getReposData()}</tbody>
+      <tbody>{rows}</tbody>
     </table>
   );
 }
